@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from src.models import db
-from src.views import VistaPong
+from src.views import VistaPong, VistaProyectos
 
 application = create_app('default')
 app_context = application.app_context()
@@ -15,6 +15,7 @@ db.create_all()
 cors = CORS(application)
 
 api = Api(application)
+api.add_resource(VistaProyectos, '/project/<int:idCompany>')
 api.add_resource(VistaPong, '/')
 
 jwt = JWTManager(application)
