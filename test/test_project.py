@@ -44,7 +44,8 @@ class TestProject(TestCase):
             "nameProject": self.data_factory.name(),
             "startDate": '01/01/2020',
             "endDate": '01/01/2021',
-            "description": self.data_factory.text()
+            "description": self.data_factory.text(),
+            "aspirants": self.data_factory.random_int()
         }
 
         headers = {'Content-Type': 'application/json'}

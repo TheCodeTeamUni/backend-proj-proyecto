@@ -1,9 +1,10 @@
 from flask_restful import Resource
 from flask import request
 from datetime import datetime
-from src.models import db, Project, ProjectSchema
+from src.models import db, Project, ProjectSchema, ProjectDetailShema
 
-projecy_schema = ProjectSchema()
+project_schema = ProjectSchema()
+project_detail_schema = ProjectDetailShema()
 
 
 class VistaPong(Resource):
@@ -30,7 +31,7 @@ class VistaProyectos(Resource):
             db.session.add(project)
             db.session.commit()
 
-            return projecy_schema.dump(project), 201
+            return project_schema.dump(project), 201
 
         except Exception as e:
             db.session.rollback()
@@ -43,7 +44,7 @@ class VistaProyectos(Resource):
             projects = Project.query.filter_by(idCompany=idCompany).all()
 
             if projects:
-                return projecy_schema.dump(projects, many=True), 200
+                return project_detail_schema.dump(projects, many=True), 200
             else:
                 return {'error': 'No se encontraron proyectos'}, 404
 
