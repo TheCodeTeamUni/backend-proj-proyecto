@@ -17,6 +17,17 @@ class Project(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class ProjectAspirant(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idProject = db.Column(db.Integer, nullable=False)
+    idUser = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String)
+    lastName = db.Column(db.String)
+    role = db.Column(db.String)
+    notes = db.Column(db.String)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class ProjectSchema(SQLAlchemySchema):
     class Meta:
         model = Project
@@ -32,8 +43,23 @@ class ProjectDetailShema(SQLAlchemySchema):
         model = Project
         load_instance = True
 
+    id = fields.Integer()
     nameProject = fields.String()
     startDate = fields.DateTime()
     endDate = fields.DateTime()
     aspirants = fields.Integer()
     description = fields.String()
+
+
+class ProjectAspirantSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = ProjectAspirant
+        load_instance = True
+
+    idProject = fields.Integer()
+    idUser = fields.Integer()
+    name = fields.String()
+    lastName = fields.String()
+    role = fields.String()
+    notes = fields.String()
