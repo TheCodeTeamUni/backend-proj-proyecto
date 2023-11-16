@@ -131,7 +131,7 @@ class TestProject(TestCase):
             "notes": self.data_factory.text()
         }
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
@@ -149,7 +149,7 @@ class TestProject(TestCase):
 
         headers = {'Content-Type': 'application/json'}
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
@@ -179,11 +179,11 @@ class TestProject(TestCase):
             "notes": self.data_factory.text()
         }
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
@@ -212,7 +212,7 @@ class TestProject(TestCase):
             "notes": self.data_factory.text()
         }
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
@@ -242,11 +242,11 @@ class TestProject(TestCase):
             "notes": self.data_factory.text()
         }
 
-        sol_aspirant = self.client.post("/aspirant/1",
+        sol_aspirant = self.client.post("/project/aspirant/1",
                                         data=json.dumps(data),
                                         headers=headers)
 
-        sol_aspirant = self.client.get("/aspirant/1",
+        sol_aspirant = self.client.get("/project/aspirant/1",
                                        headers=headers)
 
         self.assertEqual(sol_aspirant.status_code, 200)
@@ -256,7 +256,7 @@ class TestProject(TestCase):
 
         headers = {'Content-Type': 'application/json'}
 
-        sol_aspirant = self.client.get("/aspirant/2",
+        sol_aspirant = self.client.get("/project/aspirant/2",
                                        headers=headers)
 
         self.assertEqual(sol_aspirant.status_code, 404)

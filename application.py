@@ -15,7 +15,7 @@ db.create_all()
 cors = CORS(application)
 
 api = Api(application)
-api.add_resource(VistaAspiranteProyecto, '/aspirant/<int:idProject>')
+api.add_resource(VistaAspiranteProyecto, '/project/aspirant/<int:idProject>')
 api.add_resource(VistaProyectos, '/project/<int:idCompany>')
 api.add_resource(VistaPong, '/')
 
