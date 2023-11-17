@@ -12,7 +12,7 @@ class VistaPong(Resource):
 
     def get(self):
         # Retorna pong si el servicio se encuentra en linea: /
-        return 'pong proyectos v1.1', 200
+        return 'pong proyectos v1.2', 200
 
 
 class VistaProyectos(Resource):
@@ -89,16 +89,23 @@ class VistaAspiranteProyecto(Resource):
             return {'error': str(e)}, 400
 
     def get(self, idProject):
-        # Retorna todos los aspirantes de un proyecto: aspirant/<idProject>
+        # Retorna todos los aspirantes de un proyecto y la información del proyecto: aspirant/<idProject>
 
         try:
+            project = Project.query.filter_by(id=idProject).first()
+
             aspirants = ProjectAspirant.query.filter_by(
                 idProject=idProject).all()
 
-            if aspirants:
-                return project_aspirant_schema.dump(aspirants, many=True), 200
-            else:
-                return {'error': 'No se encontraron aspirantes'}, 404
+            if not project:
+                return {'error': 'El proyecto no existe'}, 404
+
+            aspirants_detail = project_aspirant_schema.dump(
+                aspirants, many=True)
+
+            project_detail = project_detail_schema.dump(project)
+
+            return {'project': project_detail, 'aspirants': aspirants_detail}, 200
 
         except Exception as e:
             return {'error': str(e)}, 400

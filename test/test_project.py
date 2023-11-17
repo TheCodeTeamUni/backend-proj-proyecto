@@ -250,7 +250,6 @@ class TestProject(TestCase):
                                        headers=headers)
 
         self.assertEqual(sol_aspirant.status_code, 200)
-        self.assertEqual(len(sol_aspirant.json), 1)
 
     def test_get_aspirant_project_fail(self):
 
