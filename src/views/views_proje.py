@@ -65,14 +65,9 @@ class VistaAspiranteProyecto(Resource):
             project = Project.query.filter_by(id=idProject).first()
             aspirants = ProjectAspirant.query.filter_by(
                 idProject=idProject).all()
-            userExist = ProjectAspirant.query.filter_by(
-                idUser=aspirant['idUser']).first()
 
             if not project:
                 return {'error': 'El proyecto no existe'}, 404
-
-            if userExist:
-                return {'error': 'El usuario ya esta asociado a un proyecto'}, 400
 
             if len(aspirants) >= project.aspirants:
                 return {'error': 'El proyecto ya tiene el numero maximo de aspirantes'}, 400
