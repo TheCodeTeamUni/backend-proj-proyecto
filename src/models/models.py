@@ -37,7 +37,6 @@ class Interview(db.Model):
     lastNameAspirant = db.Column(db.String, nullable=False)
     role = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    hour = db.Column(db.String, nullable=False)
     notes = db.Column(db.String)
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
@@ -89,7 +88,6 @@ class InterviewAspirantSchema(SQLAlchemySchema):
     nameCompany = fields.String()
     role = fields.String()
     date = fields.DateTime()
-    hour = fields.String()
     notes = fields.String()
 
 
@@ -104,6 +102,5 @@ class InterviewCompanySchema(SQLAlchemySchema):
     lastNameAspirant = fields.String()
     role = fields.String()
     date = fields.DateTime()
-    hour = fields.String()
     notes = fields.String()
     createdAt = fields.DateTime()
