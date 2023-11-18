@@ -4,6 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from src.models import db
 from src.views import VistaPong, VistaProyectos, VistaAspiranteProyecto
+from src.views import VistaEntrevistas, VistaEntrevistasAspirante
 
 application = create_app('default')
 app_context = application.app_context()
@@ -18,6 +19,10 @@ api = Api(application)
 api.add_resource(VistaAspiranteProyecto, '/project/aspirant/<int:idProject>')
 api.add_resource(VistaProyectos, '/project/<int:idCompany>')
 api.add_resource(VistaPong, '/')
+
+api.add_resource(VistaEntrevistas, '/interview/company/<int:idCompany>')
+api.add_resource(VistaEntrevistasAspirante,
+                 '/interview/aspirant/<int:idAspirant>')
 
 jwt = JWTManager(application)
 
