@@ -28,6 +28,20 @@ class ProjectAspirant(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class Interview(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idCompany = db.Column(db.Integer, nullable=False)
+    nameCompany = db.Column(db.String, nullable=False)
+    idAspirant = db.Column(db.Integer, nullable=False)
+    nameAspirant = db.Column(db.String, nullable=False)
+    lastNameAspirant = db.Column(db.String, nullable=False)
+    role = db.Column(db.String, nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    hour = db.Column(db.String, nullable=False)
+    notes = db.Column(db.String)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class ProjectSchema(SQLAlchemySchema):
     class Meta:
         model = Project
@@ -63,3 +77,33 @@ class ProjectAspirantSchema(SQLAlchemySchema):
     lastName = fields.String()
     role = fields.String()
     notes = fields.String()
+
+
+class InterviewAspirantSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = Interview
+        load_instance = True
+
+    idCompany = fields.Integer()
+    nameCompany = fields.String()
+    role = fields.String()
+    date = fields.DateTime()
+    hour = fields.String()
+    notes = fields.String()
+
+
+class InterviewCompanySchema(SQLAlchemySchema):
+
+    class Meta:
+        model = Interview
+        load_instance = True
+
+    idAspirant = fields.Integer()
+    nameAspirant = fields.String()
+    lastNameAspirant = fields.String()
+    role = fields.String()
+    date = fields.DateTime()
+    hour = fields.String()
+    notes = fields.String()
+    createdAt = fields.DateTime()
