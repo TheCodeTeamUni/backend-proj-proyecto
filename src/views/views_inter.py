@@ -1,10 +1,11 @@
 from flask_restful import Resource
 from flask import request
 from datetime import datetime
-from src.models import db, Interview, InterviewAspirantSchema, InterviewCompanySchema
+from src.models import db, Interview, InterviewResult, InterviewAspirantSchema, InterviewCompanySchema, InterviewResultSchema
 
 interview_aspirant_schema = InterviewAspirantSchema()
 interview_company_schema = InterviewCompanySchema()
+interview_result_schema = InterviewResultSchema()
 
 
 class VistaEntrevistas(Resource):
@@ -55,6 +56,64 @@ class VistaEntrevistasAspirante(Resource):
                 return interview_aspirant_schema.dump(interviews, many=True), 200
             else:
                 return {'error': 'No se encontraron entrevistas'}, 404
+
+        except Exception as e:
+            return {'error': str(e)}, 400
+
+
+class VistaEntrevista(Resource):
+
+    def get(self, idInterview):
+        # Retorna una entrevista de una empresa y un aspirante: interview/<idInterview>
+
+        try:
+            interview = Interview.query.filter_by(id=idInterview).first()
+
+            if interview:
+                return interview_company_schema.dump(interview), 200
+            else:
+                return {'error': 'No se encontró la entrevista'}, 404
+
+        except Exception as e:
+            return {'error': str(e)}, 400
+
+
+class VistaEntrevistaResultado(Resource):
+
+    def post(self, idInterview):
+        # Crea un resultado de entrevista para una entrevista: interview/result/<idInterview>
+
+        try:
+            result = request.get_json()
+            result['idInterview'] = idInterview
+
+            interview = Interview.query.filter_by(id=idInterview).first()
+
+            if not interview:
+                return {'error': 'No se encontró la entrevista'}, 404
+
+            result = InterviewResult(**result)
+
+            db.session.add(result)
+            db.session.commit()
+
+            return {'mensaje': 'Resultado de entrevista creado exitosamente'}, 201
+
+        except Exception as e:
+            db.session.rollback()
+            return {'error': str(e)}, 400
+
+    def get(self, idInterview):
+        # Retorna un resultado de entrevista para una entrevista: interview/result/<idInterview>
+
+        try:
+            result = InterviewResult.query.filter_by(
+                idInterview=idInterview).first()
+
+            if result:
+                return interview_result_schema.dump(result), 200
+            else:
+                return {'error': 'No se encontró el resultado de entrevista'}, 404
 
         except Exception as e:
             return {'error': str(e)}, 400
