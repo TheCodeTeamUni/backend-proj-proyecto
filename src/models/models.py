@@ -49,6 +49,13 @@ class InterviewResult(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class Performance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idAspirant = db.Column(db.Integer, nullable=False)
+    performance = db.Column(db.Float, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class ProjectSchema(SQLAlchemySchema):
     class Meta:
         model = Project
