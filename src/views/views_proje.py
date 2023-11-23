@@ -12,7 +12,7 @@ class VistaPong(Resource):
 
     def get(self):
         # Retorna pong si el servicio se encuentra en linea: /
-        return 'pong proyectos v1.3', 200
+        return 'pong proyectos v1.4', 200
 
 
 class VistaProyectos(Resource):
