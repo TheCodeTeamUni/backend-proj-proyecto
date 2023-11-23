@@ -41,6 +41,21 @@ class Interview(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class InterviewResult(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idInterview = db.Column(db.Integer, nullable=False)
+    result = db.Column(db.String, nullable=False)
+    notes = db.Column(db.String)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
+class Performance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idAspirant = db.Column(db.Integer, nullable=False)
+    performance = db.Column(db.Float, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class ProjectSchema(SQLAlchemySchema):
     class Meta:
         model = Project
@@ -84,6 +99,7 @@ class InterviewAspirantSchema(SQLAlchemySchema):
         model = Interview
         load_instance = True
 
+    id = fields.Integer()
     idCompany = fields.Integer()
     nameCompany = fields.String()
     role = fields.String()
@@ -97,10 +113,23 @@ class InterviewCompanySchema(SQLAlchemySchema):
         model = Interview
         load_instance = True
 
+    id = fields.Integer()
     idAspirant = fields.Integer()
     nameAspirant = fields.String()
     lastNameAspirant = fields.String()
     role = fields.String()
     date = fields.DateTime()
+    notes = fields.String()
+    createdAt = fields.DateTime()
+
+
+class InterviewResultSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = InterviewResult
+        load_instance = True
+
+    idInterview = fields.Integer()
+    result = fields.String()
     notes = fields.String()
     createdAt = fields.DateTime()
