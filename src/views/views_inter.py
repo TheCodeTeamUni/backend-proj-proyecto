@@ -92,6 +92,12 @@ class VistaEntrevistaResultado(Resource):
             if not interview:
                 return {'error': 'No se encontró la entrevista'}, 404
 
+            resultInterview = InterviewResult.query.filter_by(
+                idInterview=idInterview).first()
+
+            if resultInterview:
+                return {'error': 'Ya existe un resultado para esta entrevista'}, 400
+
             result = InterviewResult(**result)
 
             db.session.add(result)
