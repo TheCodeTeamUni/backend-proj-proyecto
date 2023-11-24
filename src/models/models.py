@@ -56,6 +56,17 @@ class Performance(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idAspirant = db.Column(db.Integer, nullable=False)
+    idCompany = db.Column(db.Integer, nullable=False)
+    nameTest = db.Column(db.String, nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    result = db.Column(db.String, nullable=False)
+    notes = db.Column(db.String)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class ProjectSchema(SQLAlchemySchema):
     class Meta:
         model = Project
@@ -133,3 +144,16 @@ class InterviewResultSchema(SQLAlchemySchema):
     result = fields.String()
     notes = fields.String()
     createdAt = fields.DateTime()
+
+
+class TestSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = Test
+        load_instance = True
+
+    id = fields.Integer()
+    nameTest = fields.String()
+    date = fields.DateTime()
+    result = fields.String()
+    notes = fields.String()

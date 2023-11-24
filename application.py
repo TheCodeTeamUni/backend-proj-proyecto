@@ -6,6 +6,7 @@ from src.models import db
 from src.views import VistaPong, VistaProyectos, VistaAspiranteProyecto
 from src.views import VistaEntrevistas, VistaEntrevistasAspirante, VistaEntrevista, VistaEntrevistaResultado
 from src.views import VistaPerformance
+from src.views import VistaPruebas, VistaPruebasAspirante
 
 application = create_app('default')
 app_context = application.app_context()
@@ -29,6 +30,9 @@ api.add_resource(VistaEntrevistaResultado,
                  '/interview/result/<int:idInterview>')
 
 api.add_resource(VistaPerformance, '/performance/<int:idAspirant>')
+
+api.add_resource(VistaPruebas, '/test/company/<int:idCompany>')
+api.add_resource(VistaPruebasAspirante, '/test/aspirant/<int:idAspirant>')
 
 jwt = JWTManager(application)
 
