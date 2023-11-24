@@ -11,7 +11,7 @@ interview_result_schema = InterviewResultSchema()
 class VistaEntrevistas(Resource):
 
     def post(self, idCompany):
-        # Crea una entrevista para una empresa: interview/<idCompany>
+        # Crea una entrevista para una empresa: interview/company/<idCompany>
 
         try:
             interview = request.get_json()
@@ -30,7 +30,7 @@ class VistaEntrevistas(Resource):
             return {'error': str(e)}, 400
 
     def get(self, idCompany):
-        # Retorna todas las entrevistas de una empresa: interview/<idCompany>
+        # Retorna todas las entrevistas de una empresa: interview/company/<idCompany>
 
         try:
             interviews = Interview.query.filter_by(idCompany=idCompany).all()
